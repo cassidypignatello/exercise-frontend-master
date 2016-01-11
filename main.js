@@ -1,16 +1,16 @@
 (function() {
   function fetchJSON(path, callback) {
-    var httpRequest = new XMLHttpRequest();
-    httpRequest.onreadystatechange = function() {
-      if (httpRequest.readyState === 4) {
-        if (httpRequest.status === 200) {
-          var data = JSON.parse(httpRequest.responseText);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          var data = JSON.parse(xhr.responseText);
           if (callback) callback(data);
         }
       }
     };
-    httpRequest.open('GET', path);
-    httpRequest.send();
+    xhr.open('GET', path);
+    xhr.send();
   }
 
   fetchJSON('shows.json', function(data){
