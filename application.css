@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700);
 * {
   margin: 0;
   padding: 0; }
@@ -19,10 +20,19 @@ nav ul {
 
 section {
   width: 290px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding-top: 10.438em;
+  font-family: 'Open Sans', sans-serif; }
 
-#episode-count, #show-title {
-  text-align: center; }
+#episode-count {
+  text-align: center;
+  padding: 0.875em 0em;
+  font-size: 0.750em;
+  color: #aaaaaa; }
+
+#show-title {
+  text-align: center;
+  font-size: 1.375em; }
 
 @media screen and (min-width: 20em) {
   header {
