@@ -38,13 +38,13 @@ nav ul {
     list-style: none;
 }
 
-@media only screen and (min-width: 20em) {
+@media screen and (min-width: 20em) {
   header {
     display: none;
   }
 }
 
-@media only screen and (min-width: 61.250em) {
+@media screen and (min-width: 61.250em) {
   header {
     display: block;
   }
