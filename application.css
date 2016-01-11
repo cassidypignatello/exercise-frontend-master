@@ -3,12 +3,7 @@
   padding: 0; }
 
 body {
-  line-height: 1;
-  width: 100%; }
-
-#site-wrapper {
-  width: 40em;
-  min-width: 20em; }
+  line-height: 1; }
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, nav, section {
@@ -17,11 +12,26 @@ footer, header, hgroup, nav, section {
 nav ul {
   list-style: none; }
 
+#site-wrapper {
+  width: 100%;
+  height: 87.5em;
+  min-width: 20em; }
+
+section {
+  width: 290px;
+  margin: 0 auto; }
+
+#episode-count, #show-title {
+  text-align: center; }
+
 @media screen and (min-width: 20em) {
   header {
     display: none; } }
 @media screen and (min-width: 61.25em) {
   header {
-    display: block; } }
+    display: block; }
+
+  #site-wrapper {
+    max-width: 160em; } }
 
 /*# sourceMappingURL=application.css.map */

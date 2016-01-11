@@ -28,14 +28,10 @@
 // }
 
 body {
-    line-height: 1;
-    width: 100%;
+  line-height: 1;
+  // width: 100%;
 }
 
-#site-wrapper {
-  width: 40em;
-  min-width: 20em;
-}
 
 article,aside,details,figcaption,figure,
 footer,header,hgroup,,nav,section { 
@@ -44,6 +40,23 @@ footer,header,hgroup,,nav,section {
 
 nav ul {
     list-style: none;
+}
+
+#site-wrapper {
+  width: 100%;
+  height: 87.5em;
+  // max-width: 40em;
+  min-width: 20em;
+  // margin: 0 auto;
+}
+
+section {
+  width: 290px;
+  margin: 0 auto;
+}
+
+#episode-count, #show-title {
+  text-align: center;
 }
 
 @media screen and (min-width: 20em) {
@@ -56,4 +69,9 @@ nav ul {
   header {
     display: block;
   }
+
+  #site-wrapper {
+    max-width: 160em;
+  }
+
 }
