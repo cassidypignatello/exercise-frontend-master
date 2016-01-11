@@ -38,9 +38,10 @@ nav ul {
     list-style: none;
 }
 
-
-header {
-  display: none;
+@media only screen and (min-width: 20em) {
+  header {
+    display: none;
+  }
 }
 
 @media only screen and (min-width: 61.250em) {
