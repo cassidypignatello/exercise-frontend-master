@@ -47,6 +47,10 @@ section {
   padding-top: 10.438em;
 }
 
+header {
+  display: none;
+}
+
 footer {
   width: 100%;
   height: 33.438em; 
@@ -87,11 +91,8 @@ div [role="main"] {
   margin: 0 auto;
 }
 
-@media screen and (min-width: 20em) {
-  header {
-    display: none;
-  }
-}
+// @media screen and (min-width: 20em) {
+// }
 
 @media screen and (min-width: 61.250em) {
   header {
