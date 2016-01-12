@@ -2,6 +2,8 @@
 * {
   margin: 0;
   padding: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
 body {
@@ -39,6 +41,13 @@ section {
 
 footer {
   width: 100%; }
+
+nav {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eaeaea), color-stop(0.03, #ffffff));
+  padding-top: 5px; }
+
+nav > div {
+  background: #fff; }
 
 div [role=main] {
   margin-bottom: 13.188em; }
