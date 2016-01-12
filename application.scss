@@ -5,7 +5,7 @@
   padding: 0;
   // -moz-box-sizing: border-box;
   // -webkit-box-sizing: border-box;
-  // box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 
@@ -42,8 +42,16 @@ footer,header,hgroup,,nav,section {
     display: block;
 }
 
-nav ul li {
+ul {
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  left: 20px;
+}
+
+li {
     display: inline-block;
+    flex: none;
     width: 4.25em;
     height: 4.188em;
     margin-top: 1.625em;
@@ -87,11 +95,15 @@ div [role=main] {
 
 .show-selector {
   // position: relative;
-  display: inline-block;
-  width: 4.25em;
-  height: 4.188em;
+  // display: inline-block;
+  // width: 4.25em;
+  // height: 4.188em;
   background-color: #e5e5e5;
   margin-left: 6.125em;
+}
+
+.menu-container {
+  margin: 0 auto;
 }
 
 @media screen and (min-width: 20em) {

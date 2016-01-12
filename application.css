@@ -1,7 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:700);
 * {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  box-sizing: border-box; }
 
 body {
   line-height: 1;
@@ -12,8 +13,15 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, nav, section {
   display: block; }
 
-nav ul li {
+ul {
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  left: 20px; }
+
+li {
   display: inline-block;
+  flex: none;
   width: 4.25em;
   height: 4.188em;
   margin-top: 1.625em;
@@ -46,11 +54,11 @@ div [role=main] {
   font-size: 1.375em; }
 
 .show-selector {
-  display: inline-block;
-  width: 4.25em;
-  height: 4.188em;
   background-color: #e5e5e5;
   margin-left: 6.125em; }
+
+.menu-container {
+  margin: 0 auto; }
 
 @media screen and (min-width: 20em) {
   header {
