@@ -68,6 +68,7 @@ nav > div {
 
 div [role="main"] {
   margin-bottom: 13.188em;
+  clear: right;
 }
 
 #episode-count {
@@ -91,11 +92,10 @@ div [role="main"] {
   margin: 0 auto;
 }
 
-// @media screen and (min-width: 20em) {
-// }
-
 @media screen and (min-width: 61.250em) {
   header {
+    width: 80%;
+    float: right;
     display: block;
   }
 
@@ -105,6 +105,22 @@ div [role="main"] {
 
   #site-wrapper {
     max-width: 160em;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    left: 2.5em;
+  }
+
+  nav {
+    padding-top: 0em;
+    box-shadow: -5px 5px 5px #eaeaea;
+  }
+
+  nav > div {
+    background: #fff;
   }
 
 }

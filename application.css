@@ -54,7 +54,8 @@ nav > div {
   background: #fff; }
 
 div [role="main"] {
-  margin-bottom: 13.188em; }
+  margin-bottom: 13.188em;
+  clear: right; }
 
 #episode-count {
   text-align: center;
@@ -75,12 +76,27 @@ div [role="main"] {
 
 @media screen and (min-width: 61.25em) {
   header {
+    width: 80%;
+    float: right;
     display: block; }
 
   footer {
     display: none; }
 
   #site-wrapper {
-    max-width: 160em; } }
+    max-width: 160em; }
+
+  ul {
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    left: 2.5em; }
+
+  nav {
+    padding-top: 0em;
+    box-shadow: -5px 5px 5px #eaeaea; }
+
+  nav > div {
+    background: #fff; } }
 
 /*# sourceMappingURL=application.css.map */
