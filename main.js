@@ -1,7 +1,10 @@
 (function() {
   var img = document.querySelector('#show-cover');
   var p = document.querySelector('#episode-count');
-  var h2 = document.querySelector('#show-title'); 
+  var h2 = document.querySelector('#show-title');
+  var header = document.querySelector('header');
+  var headerNav = document.querySelector('header > nav');
+  var footerNav = document.querySelector('footer > nav');
   var navButtons = document.querySelectorAll('.show-selector');
   var arr = Array.prototype.slice.call(navButtons);
 
@@ -11,10 +14,22 @@
   });
 
   function checkSize() {
-    var headerDisplay = window.getComputedStyle(document.querySelector("header"), "display").getPropertyValue("display");
-    if (headerDisplay === "block") {
-      console.log("The screen is bigger!");
+    var headerDisplay = window.getComputedStyle(header, 'display').getPropertyValue('display');
+    if (headerDisplay === 'none') {
+      appendMenu(footerNav);
+    } else {
+      appendMenu(headerNav);
     }
+  }
+
+  function appendMenu(el) {
+    var menuContainer = document.createElement('div');
+    menuContainer.className = 'menu-container';
+    menuContainer.innerHTML = '<ul><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li>1</li><li>2</li><li>3</li><li>4</li></ul>';
+    while (el.firstChild) {
+      el.removeChild(el.firstChild);
+    }
+    el.appendChild(menuContainer);
   }
 
   function fetchJSON(path, callback) {
@@ -52,6 +67,9 @@
         h2.innerHTML = data[id].title.toUpperCase();
       });
     }
-
   });
+
+  // function displayJSON() {
+    
+  // }
 })();
