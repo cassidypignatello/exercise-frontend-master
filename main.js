@@ -52,7 +52,6 @@
     p.innerHTML = data[0].episodes + " EPISODES";
     h2.innerHTML = data[0].title.toUpperCase();
 
-    // add active class to square
     // display correct show number
     
 
@@ -70,6 +69,6 @@
   });
 
   // function displayJSON() {
-    
+
   // }
 })();
