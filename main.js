@@ -28,9 +28,19 @@
      
     // make nav button background black on click
     var navButtons = document.querySelectorAll('.show-selector');
-    for (var i = 0; i < navButtons.length; i++) {
-      navButtons[i].addEventListener('click', function() {
+    var arr = Array.prototype.slice.call(navButtons);
+
+    for (var i = 0; i < arr.length; i++) {
+      arr[i].addEventListener('click', function() {
+        var id = arr.indexOf(this);
+        if (id >= 4) {
+          id -= 4;
+        }
+        console.log(id);
         this.style.backgroundColor = 'black';
+        img.src = data[id].product_image_url;
+        p.innerHTML = data[id].episodes + " EPISODES";
+        h2.innerHTML = data[id].title.toUpperCase();
       });
     }
 
