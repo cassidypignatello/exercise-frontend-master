@@ -14,11 +14,25 @@
   }
 
   fetchJSON('shows.json', function(data){
-    var img = document.getElementById('show-cover');
-    var p = document.getElementById('episode-count');
-    var h2 = document.getElementById('show-title'); 
+    // display first show's info on load
+    var img = document.querySelector('#show-cover');
+    var p = document.querySelector('#episode-count');
+    var h2 = document.querySelector('#show-title'); 
     img.src = data[0].product_image_url;
     p.innerHTML = data[0].episodes + " EPISODES";
     h2.innerHTML = data[0].title.toUpperCase();
+
+    // add active class to square
+    // display correct show number
+    
+     
+    // make nav button background black on click
+    var navButtons = document.querySelectorAll('.show-selector');
+    for (var i = 0; i < navButtons.length; i++) {
+      navButtons[i].addEventListener('click', function() {
+        this.style.backgroundColor = 'black';
+      });
+    }
+
   });
 })();
