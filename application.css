@@ -67,6 +67,9 @@ div [role="main"] {
   text-align: center;
   font-size: 1.375em; }
 
+#active {
+  background-color: #000; }
+
 .show-selector {
   background-color: #e5e5e5;
   margin-left: 6.125em; }

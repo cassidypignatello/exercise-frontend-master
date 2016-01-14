@@ -5,6 +5,7 @@
   var header = document.querySelector('header');
   var headerNav = document.querySelector('header > nav');
   var footerNav = document.querySelector('footer > nav');
+  var firstLoad = true;
   var id = 0;
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -14,21 +15,49 @@
 
   function checkSize() {
     var headerDisplay = window.getComputedStyle(header, 'display').getPropertyValue('display');
-    if (headerDisplay === 'none' && !footerNav.firstChild) {
+    if (headerDisplay === 'none') { 
       appendMenu(footerNav);
-    } else if (headerDisplay === 'block' && !headerNav.firstChild) {
-      appendMenu(headerNav);
+    } else if (headerDisplay === 'block') { 
+      appendMenu(headerNav); 
     }
   }
 
   function appendMenu(el, data) {
-    var menuContainer = document.createElement('div');
-    menuContainer.className = 'menu-container';
-    menuContainer.innerHTML = '<ul><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li>1</li><li>2</li><li>3</li><li>4</li></ul>';
-    while (el.firstChild) {
-      el.removeChild(el.firstChild);
+    var menu = document.querySelectorAll('.menu-container');
+    var nav = document.querySelectorAll('nav');
+    var menuArr = Array.prototype.slice.call(menu);
+    var navArr = Array.prototype.slice.call(nav);
+    if (firstLoad) {
+      var menuContainer = document.createElement('div');
+      menuContainer.className = 'menu-container';
+      menuContainer.innerHTML = '<ul><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li>1</li><li>2</li><li>3</li><li>4</li></ul>';
+      el.appendChild(menuContainer);
+    } else {
+      menuContainer = menuArr[menuArr.length - 1].cloneNode(true);
+      var newMenu = menuContainer;
+      if (menuContainer) {
+        for (var i = 0; i < navArr.length; i++) {
+          navArr[i].innerHTML = '';
+        }
+      }
+      el.appendChild(newMenu);
     }
-    el.appendChild(menuContainer);
+    firstLoad = false;
+    addClicks();
+  }
+
+  var addClicks = function() {
+    var showSelector = document.querySelectorAll('.show-selector');
+    var navButtons = Array.prototype.slice.call(showSelector);
+
+    for (var i = 0; i < navButtons.length; i++) {
+      navButtons[i].addEventListener('click', function() {
+        id = navButtons.indexOf(this);
+        if (id >= 4) { id -= 4; }
+        this.id = 'active';
+        return id; 
+      });
+    }
   }
 
   function fetchJSON(path, callback) {
@@ -37,7 +66,7 @@
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           var data = JSON.parse(xhr.responseText);
-          if (callback) 
+          if (typeof callback === 'function') 
             callback(data);
         }
       }
@@ -47,23 +76,9 @@
   }
 
   fetchJSON('/shows.json', function(data) {
-    var navButtons = document.querySelectorAll('.show-selector');
-    var arr = Array.prototype.slice.call(navButtons);
     img.src = data[id].product_image_url;
     p.innerHTML = data[id].episodes + " EPISODES";
     h2.innerHTML = data[id].title.toUpperCase();
 
-    for (var i = 0; i < arr.length; i++) {
-      arr[i].addEventListener('click', function() {
-        id = arr.indexOf(this);
-        if (id >= 4) {
-          id -= 4;
-        }
-        this.style.backgroundColor = 'black';   
-        img.src = data[id].product_image_url;
-        p.innerHTML = data[id].episodes + " EPISODES";
-        h2.innerHTML = data[id].title.toUpperCase();
-      });
-    }
   });
 })();
