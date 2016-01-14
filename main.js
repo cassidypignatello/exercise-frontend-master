@@ -1,3 +1,4 @@
+'use strict';
 (function() {
   var img = document.querySelector('#show-cover');
   var p = document.querySelector('#episode-count');
@@ -5,6 +6,7 @@
   var header = document.querySelector('header');
   var headerNav = document.querySelector('header > nav');
   var footerNav = document.querySelector('footer > nav');
+  var menuContainer;
   var firstLoad = true;
   var id = 0;
 
@@ -22,13 +24,13 @@
     }
   }
 
-  function appendMenu(el, data) {
+  function appendMenu(el) {
     var menu = document.querySelectorAll('.menu-container');
     var nav = document.querySelectorAll('nav');
     var menuArr = Array.prototype.slice.call(menu);
     var navArr = Array.prototype.slice.call(nav);
     if (firstLoad) {
-      var menuContainer = document.createElement('div');
+      menuContainer = document.createElement('div');
       menuContainer.className = 'menu-container';
       menuContainer.innerHTML = '<ul><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li>1</li><li>2</li><li>3</li><li>4</li></ul>';
       el.appendChild(menuContainer);
@@ -58,7 +60,7 @@
         return id; 
       });
     }
-  }
+  };
 
   function fetchJSON(path, callback) {
     var xhr = new XMLHttpRequest();
@@ -77,7 +79,7 @@
 
   fetchJSON('/shows.json', function(data) {
     img.src = data[id].product_image_url;
-    p.innerHTML = data[id].episodes + " EPISODES";
+    p.innerHTML = data[id].episodes + ' EPISODES';
     h2.innerHTML = data[id].title.toUpperCase();
 
   });
