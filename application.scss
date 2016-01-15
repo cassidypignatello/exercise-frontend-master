@@ -71,6 +71,11 @@ div [role="main"] {
   clear: right;
 }
 
+li > p {
+  position: absolute;
+  top: 20px;
+}
+
 #episode-count {
   text-align: center;
   padding: 0.875em 0em;
@@ -92,8 +97,16 @@ div [role="main"] {
   margin-left: 6.125em;
 }
 
+.show-selector:hover {
+  cursor: pointer;
+}
+
 .menu-container {
   margin: 0 auto;
+}
+
+.show-id {
+  display: none;
 }
 
 

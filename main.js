@@ -32,7 +32,7 @@
     if (firstLoad) {
       menuContainer = document.createElement('div');
       menuContainer.className = 'menu-container';
-      menuContainer.innerHTML = '<ul><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li>1</li><li>2</li><li>3</li><li>4</li></ul>';
+      menuContainer.innerHTML = '<ul><li class="show-selector" id="active"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li class="show-id">1</li><li class="show-id">2</li><li class="show-id">3</li><li class="show-id">4</li></ul>';
       el.appendChild(menuContainer);
     } else {
       menuContainer = menuArr[menuArr.length - 1].cloneNode(true);
@@ -49,17 +49,20 @@
   }
 
   var addClicks = function() {
+    var navList = document.querySelector('.menu-container > ul');
     var showSelector = document.querySelectorAll('.show-selector');
     var navButtons = Array.prototype.slice.call(showSelector);
 
-    for (var i = 0; i < navButtons.length; i++) {
-      navButtons[i].addEventListener('click', function() {
+    navList.addEventListener('click', function(e) {
+      var navButton = e.target;
         id = navButtons.indexOf(this);
         if (id >= 4) { id -= 4; }
-        this.id = 'active';
-        return id; 
-      });
-    }
+        navButtons.forEach(function(otherBtn) {
+          if (otherBtn.id === 'active') { otherBtn.id = ''; }  
+        });
+        navButton.id = 'active';
+        // return id;      
+    });
   };
 
   function fetchJSON(path, callback) {
@@ -78,6 +81,7 @@
   }
 
   fetchJSON('/shows.json', function(data) {
+    
     img.src = data[id].product_image_url;
     p.innerHTML = data[id].episodes + ' EPISODES';
     h2.innerHTML = data[id].title.toUpperCase();
