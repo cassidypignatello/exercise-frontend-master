@@ -61,14 +61,40 @@
           if (otherBtn.classList.contains('active')) { otherBtn.classList.remove('active'); }  
         });
         navButton.classList.add('active');
-        e.preventDefault();    
+        var shows = JSON.parse(sessionStorage.getItem('shows'));
+        var lastChoice = JSON.stringify(shows[id]);
+        // shows[id].navButton = navButton;
+        // console.log(shows[id]);
+        // console.log(navButton);
+        sessionStorage.setItem('lastChoice', lastChoice);
+        history.pushState(shows[id], shows[id].title, '?id=' + shows[id].id);
+        // e.preventDefault();    
       }
-      var shows = JSON.parse(sessionStorage.getItem('shows'));
-      var lastChoice = JSON.stringify(shows[id]);
-      sessionStorage.setItem('lastChoice', lastChoice);
       displayShow(shows[id]);
     });
+    window.addEventListener('popstate', function(event) {
+      console.log('popstate fired!');
+      // console.log(history);
+      var hs = history.state;
+
+      if ((hs === null) || (hs === undefined)) hs = event.state;
+      if ((hs === null) || (hs === undefined)) hs = window.event.state;
+
+      // if (hs !== null) update (hs);
+      // if (!navButton.classList.contains('active')) {
+      //   navButton.classList.add('active');
+      // }
+      displayShow(hs);
+    });
   };
+
+
+  function updateContent(data) {
+    if (data === null) {
+      return;
+    }
+    console.log(data)
+  }
 
 
   function fetchJSON(path, callback) {
@@ -89,17 +115,32 @@
   fetchJSON('/shows.json', function(data) {
     var prevSelection = JSON.parse(sessionStorage.getItem('lastChoice'));
     var showData = JSON.stringify(data);
-    sessionStorage.setItem('shows', showData);
-    if (typeof prevSelection === 'object' && prevSelection !== null) {
-      displayShow(prevSelection);
-    } else {
-      displayShow(data[id]);
+    if (location.search.length > 0) {
+      id = location.search[location.search.length - 1] - 1;
+      console.log(id);
     }
+    sessionStorage.setItem('shows', showData);
+    history.pushState(data[id], data[id].title, '?id=' + data[id].id);
+    displayShow(data[id]);
+    // if (typeof prevSelection === 'object' && prevSelection !== null) {
+    //   displayShow(prevSelection);
+    // } else {
+    // }
   });
 
   function displayShow(data) {
+    // var url = document.location.href;
+    // var show = data.id;
+    // url += '?id=' + show;
+    // history.replaceState({
+    //   id: data.id,
+    //   title: data.title,
+    //   episodes: data.episodes,
+    //   product_image_url: data.product_image_url
+    // }, document.title, document.location.href);
     img.src = data.product_image_url;
     p.innerHTML = data.episodes + ' EPISODES';
     h2.innerHTML = data.title.toUpperCase();
   }
+
 })();
