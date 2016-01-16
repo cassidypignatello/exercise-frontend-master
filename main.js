@@ -31,8 +31,8 @@
     var navArr = Array.prototype.slice.call(nav);
     if (firstLoad) {
       menuContainer = document.createElement('div');
-      menuContainer.className = 'menu-container';
-      menuContainer.innerHTML = '<ul><li class="show-selector" id="active"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li class="show-id">1</li><li class="show-id">2</li><li class="show-id">3</li><li class="show-id">4</li></ul>';
+      menuContainer.classList.add('menu-container');
+      menuContainer.innerHTML = '<ul><li class="show-selector active"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li class="show-id">1</li><li class="show-id">2</li><li class="show-id">3</li><li class="show-id">4</li></ul>';
       el.appendChild(menuContainer);
     } else {
       menuContainer = menuArr[menuArr.length - 1].cloneNode(true);
@@ -49,19 +49,19 @@
   }
 
   var addClicks = function() {
-    var navList = document.querySelector('.menu-container > ul');
+    var navList = document.querySelector('.menu-container');
     var showSelector = document.querySelectorAll('.show-selector');
     var navButtons = Array.prototype.slice.call(showSelector);
 
     navList.addEventListener('click', function(e) {
       var navButton = e.target;
-        id = navButtons.indexOf(this);
-        if (id >= 4) { id -= 4; }
+      if (navButton && navButton.nodeName === 'LI') {
+        id = navButtons.indexOf(navButton);
         navButtons.forEach(function(otherBtn) {
-          if (otherBtn.id === 'active') { otherBtn.id = ''; }  
+          if (otherBtn.classList.contains('active')) { otherBtn.classList.remove('active'); }  
         });
-        navButton.id = 'active';
-        // return id;      
+        navButton.classList.add('active');      
+      }
     });
   };
 

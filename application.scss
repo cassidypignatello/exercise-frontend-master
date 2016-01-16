@@ -88,10 +88,6 @@ li > p {
   font-size: 1.375em;
 }
 
-#active {
-  background-color: #000;
-}
-
 .show-selector {
   background-color: #e5e5e5;
   margin-left: 6.125em;
@@ -109,6 +105,9 @@ li > p {
   display: none;
 }
 
+.active {
+  background-color: #000;
+}
 
 @media screen and (min-width: 61.250em) {
   header {
