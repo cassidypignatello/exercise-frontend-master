@@ -66,9 +66,7 @@
       var shows = JSON.parse(sessionStorage.getItem('shows'));
       var lastChoice = JSON.stringify(shows[id]);
       sessionStorage.setItem('lastChoice', lastChoice);
-      img.src = shows[id].product_image_url;
-      p.innerHTML = shows[id].episodes + ' EPISODES';
-      h2.innerHTML = shows[id].title.toUpperCase();
+      displayShow(shows[id]);
     });
   };
 
@@ -93,13 +91,15 @@
     var showData = JSON.stringify(data);
     sessionStorage.setItem('shows', showData);
     if (typeof prevSelection === 'object' && prevSelection !== null) {
-      img.src = prevSelection.product_image_url;
-      p.innerHTML = prevSelection.episodes + ' EPISODES';
-      h2.innerHTML = prevSelection.title.toUpperCase();
+      displayShow(prevSelection);
     } else {
-      img.src = data[id].product_image_url;
-      p.innerHTML = data[id].episodes + ' EPISODES';
-      h2.innerHTML = data[id].title.toUpperCase();
+      displayShow(data[id]);
     }
   });
+
+  function displayShow(data) {
+    img.src = data.product_image_url;
+    p.innerHTML = data.episodes + ' EPISODES';
+    h2.innerHTML = data.title.toUpperCase();
+  }
 })();
