@@ -74,7 +74,6 @@
     });
     window.addEventListener('popstate', function(event) {
       console.log('popstate fired!');
-      // console.log(history);
       var hs = history.state;
 
       if ((hs === null) || (hs === undefined)) hs = event.state;
@@ -87,15 +86,6 @@
       displayShow(hs);
     });
   };
-
-
-  function updateContent(data) {
-    if (data === null) {
-      return;
-    }
-    console.log(data)
-  }
-
 
   function fetchJSON(path, callback) {
     var xhr = new XMLHttpRequest();
@@ -113,7 +103,7 @@
   }
 
   fetchJSON('/shows.json', function(data) {
-    var prevSelection = JSON.parse(sessionStorage.getItem('lastChoice'));
+    // var prevSelection = JSON.parse(sessionStorage.getItem('lastChoice'));
     var showData = JSON.stringify(data);
     if (location.search.length > 0) {
       id = location.search[location.search.length - 1] - 1;
@@ -129,15 +119,6 @@
   });
 
   function displayShow(data) {
-    // var url = document.location.href;
-    // var show = data.id;
-    // url += '?id=' + show;
-    // history.replaceState({
-    //   id: data.id,
-    //   title: data.title,
-    //   episodes: data.episodes,
-    //   product_image_url: data.product_image_url
-    // }, document.title, document.location.href);
     img.src = data.product_image_url;
     p.innerHTML = data.episodes + ' EPISODES';
     h2.innerHTML = data.title.toUpperCase();
