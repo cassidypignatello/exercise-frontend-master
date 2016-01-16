@@ -6,6 +6,7 @@
     var header = document.querySelector('header');
     var headerNav = document.querySelector('header > nav');
     var footerNav = document.querySelector('footer > nav');
+    
     var menuContainer;
     var firstLoad = true;
     var id = 0;
@@ -32,7 +33,7 @@
     if (firstLoad) {
       menuContainer = document.createElement('div');
       menuContainer.classList.add('menu-container');
-      menuContainer.innerHTML = '<ul><li class="show-selector active"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li class="show-id">1</li><li class="show-id">2</li><li class="show-id">3</li><li class="show-id">4</li></ul>';
+      menuContainer.innerHTML = '<ul><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li></li><li></li><li></li><li></li></ul>';
       el.appendChild(menuContainer);
     } else {
       menuContainer = menuArr[menuArr.length - 1].cloneNode(true);
@@ -52,7 +53,7 @@
     var navList = document.querySelector('.menu-container');
     var showSelector = document.querySelectorAll('.show-selector');
     var navButtons = Array.prototype.slice.call(showSelector);
-
+    var list = Array.prototype.slice.call(document.querySelectorAll('li'));
     navList.addEventListener('click', function(e) {
       var navButton = e.target;
       if (navButton && navButton.nodeName === 'LI') {
@@ -68,25 +69,36 @@
         // console.log(navButton);
         sessionStorage.setItem('lastChoice', lastChoice);
         history.pushState(shows[id], shows[id].title, '?id=' + shows[id].id);
-        // e.preventDefault();    
+        console.log(shows[id]);
+        var showNo = list[shows[id].id + 3];
+        var buttonNo = list[shows[id].id - 1];
+        // console.log(list);
+        list.forEach(function(item) {
+          if (item.innerHTML !== '') {
+            item.innerHTML = '';
+          }
+        });  
+        showNo.innerHTML = shows[id].id;
+        // buttonNumber.classList.add('active');
+        e.preventDefault();    
       }
       displayShow(shows[id]);
     });
-    window.addEventListener('popstate', function(event) {
-      console.log('popstate fired!');
-      var hs = history.state;
-
-      if ((hs === null) || (hs === undefined)) hs = event.state;
-      if ((hs === null) || (hs === undefined)) hs = window.event.state;
-
-      // if (hs !== null) update (hs);
-      // if (!navButton.classList.contains('active')) {
-      //   navButton.classList.add('active');
-      // }
-      displayShow(hs);
-    });
   };
 
+  window.addEventListener('popstate', function(event) {
+    console.log('popstate fired!');
+    var hs = history.state;
+
+    if ((hs === null) || (hs === undefined)) hs = event.state;
+    if ((hs === null) || (hs === undefined)) hs = window.event.state;
+
+    // if (hs !== null) update (hs);
+    // if (!navButton.classList.contains('active')) {
+    //   navButton.classList.add('active');
+    // }
+    displayShow(hs);
+  });
   function fetchJSON(path, callback) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -104,13 +116,20 @@
 
   fetchJSON('/shows.json', function(data) {
     // var prevSelection = JSON.parse(sessionStorage.getItem('lastChoice'));
+    var listItems = Array.prototype.slice.call(document.querySelectorAll('li'));
     var showData = JSON.stringify(data);
     if (location.search.length > 0) {
       id = location.search[location.search.length - 1] - 1;
-      console.log(id);
     }
     sessionStorage.setItem('shows', showData);
     history.pushState(data[id], data[id].title, '?id=' + data[id].id);
+    var showNumber = listItems[data[id].id + 3];
+    var buttonNumber = listItems[data[id].id - 1];
+    showNumber.innerHTML = data[id].id;
+    console.log(showNumber);
+    buttonNumber.classList.add('active');
+    // console.log(buttonNumber);
+    // console.log(data[id].id);
     displayShow(data[id]);
     // if (typeof prevSelection === 'object' && prevSelection !== null) {
     //   displayShow(prevSelection);
