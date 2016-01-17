@@ -84,16 +84,14 @@
 
   fetchJSON('/shows.json', function(data) {
     var showData = JSON.stringify(data);
-    if (location.search.length > 0) {
-      id = location.search[location.search.length - 1] - 1;
-    }
+    var locationSearch = location.search;
+    if (locationSearch.length > 0) id = locationSearch[locationSearch.length - 1] - 1;
     localStorage.setItem('shows', showData);
     history.pushState(data[id], data[id].title, '?id=' + data[id].id);
     displayShow(data[id]);
   });
 
   function displayShow(data) {
-    console.log(data);
     var listItems = Array.prototype.slice.call(document.querySelectorAll('li'));
     var showNumber = listItems[data.id + 3];
     var button = listItems[data.id - 1];
