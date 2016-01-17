@@ -16,13 +16,16 @@ footer, header, hgroup, nav, section {
   display: block; }
 
 ul {
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-wrap: nowrap;
   flex-wrap: nowrap;
   position: relative;
   left: 1.563em; }
 
 li {
   display: inline-block;
+  -webkit-flex: none;
   flex: none;
   width: 4.25em;
   height: 4.188em;
@@ -97,7 +100,9 @@ li > p {
     max-width: 160em; }
 
   ul {
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
     position: relative;
     left: 2.5em; }

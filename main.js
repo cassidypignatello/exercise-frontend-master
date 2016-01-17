@@ -9,6 +9,7 @@
     var menuContainer;
     var firstLoad = true;
     var id = 0;
+    var show;
 
   document.addEventListener('DOMContentLoaded', function() {
     checkSize();
@@ -17,29 +18,24 @@
 
   function checkSize() {
     var headerDisplay = window.getComputedStyle(header, 'display').getPropertyValue('display');
-    if (headerDisplay === 'none') { 
-      appendMenu(footerNav);
-    } else if (headerDisplay === 'block') { 
-      appendMenu(headerNav); 
-    }
+    if (headerDisplay === 'none') appendMenu(footerNav); 
+    else if (headerDisplay === 'block') appendMenu(headerNav); 
   }
 
   function appendMenu(el) {
-    var menu = document.querySelectorAll('.menu-container');
-    var nav = document.querySelectorAll('nav');
-    var menuArr = Array.prototype.slice.call(menu);
-    var navArr = Array.prototype.slice.call(nav);
+    var menu = Array.prototype.slice.call(document.querySelectorAll('.menu-container'));
+    var nav = Array.prototype.slice.call(document.querySelectorAll('nav'));
     if (firstLoad) {
       menuContainer = document.createElement('div');
       menuContainer.classList.add('menu-container');
       menuContainer.innerHTML = '<ul><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li></li><li></li><li></li><li></li></ul>';
       el.appendChild(menuContainer);
     } else {
-      menuContainer = menuArr[menuArr.length - 1].cloneNode(true);
+      menuContainer = menu[menu.length - 1].cloneNode(true);
       var newMenu = menuContainer;
       if (menuContainer) {
-        for (var i = 0; i < navArr.length; i++) {
-          navArr[i].innerHTML = '';
+        for (var i = 0; i < nav.length; i++) {
+          nav[i].innerHTML = '';
         }
       }
       el.appendChild(newMenu);
@@ -57,10 +53,9 @@
       if (navButton && navButton.nodeName === 'LI') {
         id = navButtons.indexOf(navButton);
         var shows = JSON.parse(localStorage.getItem('shows'));
-        var lastChoice = JSON.stringify(shows[id]);
-        displayShow(shows[id]);
-        localStorage.setItem('lastChoice', lastChoice);
-        history.pushState(shows[id], shows[id].title, '?id=' + shows[id].id);
+        show = shows[id];
+        displayShow(show);
+        history.pushState(show, show.title, '?id=' + show.id);
       }
     });
   };
@@ -72,6 +67,7 @@
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     displayShow(hs);
   });
+
   function fetchJSON(path, callback) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -97,6 +93,7 @@
   });
 
   function displayShow(data) {
+    console.log(data);
     var listItems = Array.prototype.slice.call(document.querySelectorAll('li'));
     var showNumber = listItems[data.id + 3];
     var button = listItems[data.id - 1];
