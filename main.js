@@ -1,12 +1,11 @@
-(function() {
 'use strict';
+(function() {
     var img = document.querySelector('#show-cover');
     var p = document.querySelector('#episode-count');
     var h2 = document.querySelector('#show-title');
     var header = document.querySelector('header');
     var headerNav = document.querySelector('header > nav');
     var footerNav = document.querySelector('footer > nav');
-    
     var menuContainer;
     var firstLoad = true;
     var id = 0;
@@ -53,50 +52,24 @@
     var navList = document.querySelector('.menu-container');
     var showSelector = document.querySelectorAll('.show-selector');
     var navButtons = Array.prototype.slice.call(showSelector);
-    var list = Array.prototype.slice.call(document.querySelectorAll('li'));
     navList.addEventListener('click', function(e) {
       var navButton = e.target;
       if (navButton && navButton.nodeName === 'LI') {
         id = navButtons.indexOf(navButton);
-        navButtons.forEach(function(otherBtn) {
-          if (otherBtn.classList.contains('active')) { otherBtn.classList.remove('active'); }  
-        });
-        navButton.classList.add('active');
-        var shows = JSON.parse(sessionStorage.getItem('shows'));
+        var shows = JSON.parse(localStorage.getItem('shows'));
         var lastChoice = JSON.stringify(shows[id]);
-        // shows[id].navButton = navButton;
-        // console.log(shows[id]);
-        // console.log(navButton);
-        sessionStorage.setItem('lastChoice', lastChoice);
+        displayShow(shows[id]);
+        localStorage.setItem('lastChoice', lastChoice);
         history.pushState(shows[id], shows[id].title, '?id=' + shows[id].id);
-        console.log(shows[id]);
-        var showNo = list[shows[id].id + 3];
-        var buttonNo = list[shows[id].id - 1];
-        // console.log(list);
-        list.forEach(function(item) {
-          if (item.innerHTML !== '') {
-            item.innerHTML = '';
-          }
-        });  
-        showNo.innerHTML = shows[id].id;
-        // buttonNumber.classList.add('active');
-        e.preventDefault();    
       }
-      displayShow(shows[id]);
     });
   };
 
   window.addEventListener('popstate', function(event) {
-    console.log('popstate fired!');
     var hs = history.state;
-
     if ((hs === null) || (hs === undefined)) hs = event.state;
     if ((hs === null) || (hs === undefined)) hs = window.event.state;
-
-    // if (hs !== null) update (hs);
-    // if (!navButton.classList.contains('active')) {
-    //   navButton.classList.add('active');
-    // }
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     displayShow(hs);
   });
   function fetchJSON(path, callback) {
@@ -105,8 +78,7 @@
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           var data = JSON.parse(xhr.responseText);
-          if (typeof callback === 'function') 
-            callback(data);
+          if (typeof callback === 'function') callback(data);
         }
       }
     };
@@ -115,32 +87,29 @@
   }
 
   fetchJSON('/shows.json', function(data) {
-    // var prevSelection = JSON.parse(sessionStorage.getItem('lastChoice'));
-    var listItems = Array.prototype.slice.call(document.querySelectorAll('li'));
     var showData = JSON.stringify(data);
     if (location.search.length > 0) {
       id = location.search[location.search.length - 1] - 1;
     }
-    sessionStorage.setItem('shows', showData);
+    localStorage.setItem('shows', showData);
     history.pushState(data[id], data[id].title, '?id=' + data[id].id);
-    var showNumber = listItems[data[id].id + 3];
-    var buttonNumber = listItems[data[id].id - 1];
-    showNumber.innerHTML = data[id].id;
-    console.log(showNumber);
-    buttonNumber.classList.add('active');
-    // console.log(buttonNumber);
-    // console.log(data[id].id);
     displayShow(data[id]);
-    // if (typeof prevSelection === 'object' && prevSelection !== null) {
-    //   displayShow(prevSelection);
-    // } else {
-    // }
   });
 
   function displayShow(data) {
+    var listItems = Array.prototype.slice.call(document.querySelectorAll('li'));
+    var showNumber = listItems[data.id + 3];
+    var button = listItems[data.id - 1];
+    listItems.forEach(function(item) {
+      if (item.innerHTML !== '' || item.classList.contains('active')) {
+        item.innerHTML = '';
+        item.classList.remove('active');
+      }
+    });  
+    showNumber.innerHTML = data.id;
+    button.classList.add('active');
     img.src = data.product_image_url;
     p.innerHTML = data.episodes + ' EPISODES';
     h2.innerHTML = data.title.toUpperCase();
   }
-
 })();
