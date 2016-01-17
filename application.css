@@ -58,16 +58,9 @@ nav {
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eaeaea), color-stop(0.03, #ffffff));
   padding-top: 0.313em; }
 
-nav > div {
-  background: #fff; }
-
 div [role="main"] {
   margin-bottom: 13.188em;
   clear: right; }
-
-li > p {
-  position: absolute;
-  top: 20px; }
 
 #episode-count {
   text-align: center;
@@ -82,9 +75,8 @@ li > p {
 .show-selector {
   background-color: #e5e5e5;
   margin-left: 6.125em; }
-
-.show-selector:hover {
-  cursor: pointer; }
+  .show-selector:hover {
+    cursor: pointer; }
 
 .menu-container {
   margin: 0 auto; }
@@ -105,18 +97,10 @@ li > p {
     max-width: 160em; }
 
   ul {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    position: relative;
     left: 2.5em; }
 
   nav {
     padding-top: 0em;
-    box-shadow: -5px 5px 5px #eaeaea; }
-
-  nav > div {
-    background: #fff; } }
+    box-shadow: -5px 5px 5px #eaeaea; } }
 
 /*# sourceMappingURL=application.css.map */
