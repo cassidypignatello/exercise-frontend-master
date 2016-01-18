@@ -16,28 +16,42 @@ footer, header, hgroup, nav, section {
   display: block; }
 
 ul {
+  list-style-type: none;
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
   align-items: center;
   -webkit-justify-content: space-around;
   justify-content: space-around;
-  text-align: center;
-  list-style-type: none; }
-
-ul:last-child li {
-  margin-top: -0.50em; }
-
-li {
-  width: 2.25em;
-  height: 2.188em;
-  margin: 1.25em;
-  flex: 0 0 auto;
-  -webkit-flex: 0 0 auto;
   text-align: center; }
+  @media screen and (min-width: 980px) {
+    ul {
+      position: relative;
+      top: -1em;
+      left: -5em; } }
+  ul:last-child li {
+    margin-top: -0.50em; }
+    @media screen and (min-device-width: 768px) {
+      ul:last-child li {
+        margin-top: -1.75em; } }
+  ul li {
+    width: 2.25em;
+    height: 2.188em;
+    margin: 1.25em;
+    flex: 0 0 auto;
+    -webkit-flex: 0 0 auto;
+    text-align: center; }
+    @media screen and (min-device-width: 768px) {
+      ul li {
+        width: 4.25em;
+        height: 4.188em;
+        margin: 2.938em; } }
 
 #site-wrapper {
   width: 100%; }
+  @media screen and (min-width: 980px) {
+    #site-wrapper {
+      max-width: 160em; } }
 
 section {
   width: 18.125em;
@@ -46,12 +60,24 @@ section {
 
 header {
   display: none; }
+  @media screen and (min-width: 980px) {
+    header {
+      width: 80%;
+      float: right;
+      display: block; } }
 
 footer {
   height: 33.438em; }
+  @media screen and (min-width: 980px) {
+    footer {
+      display: none; } }
 
 nav {
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eaeaea), color-stop(0.03, #ffffff)); }
+  @media screen and (min-width: 980px) {
+    nav {
+      padding-top: 0em;
+      box-shadow: -5px 5px 5px #eaeaea; } }
 
 div [role="main"] {
   margin-top: -5em;
@@ -76,40 +102,11 @@ div [role="main"] {
 .menu-container {
   margin: 0 auto;
   width: 70%; }
+  @media screen and (min-width: 980px) {
+    .menu-container {
+      height: 9.375em; } }
 
 .active {
   background-color: #000; }
-
-@media screen and (min-device-width: 768px) {
-  ul:last-child li {
-    margin-top: -1.75em; }
-
-  li {
-    width: 4.25em;
-    height: 4.188em;
-    margin: 2.938em; } }
-@media screen and (min-width: 980px) {
-  header {
-    width: 80%;
-    float: right;
-    display: block; }
-
-  footer {
-    display: none; }
-
-  #site-wrapper {
-    max-width: 160em; }
-
-  ul {
-    position: relative;
-    top: -1em;
-    left: -5em; }
-
-  .menu-container {
-    height: 9.375em; }
-
-  nav {
-    padding-top: 0em;
-    box-shadow: -5px 5px 5px #eaeaea; } }
 
 /*# sourceMappingURL=application.css.map */
