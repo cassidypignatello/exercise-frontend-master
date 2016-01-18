@@ -18,25 +18,22 @@ footer, header, hgroup, nav, section {
 ul {
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  position: relative;
-  left: 1.563em; }
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-around;
+  justify-content: space-around;
+  text-align: center;
+  list-style-type: none; }
+
+ul:last-child li {
+  margin-top: -0.50em; }
 
 li {
-  display: inline-block;
-  -webkit-flex: 0;
-  flex: 0;
-  -webkit-flex-grow: 0;
-  flex-grow: 0;
-  -webkit-flex-shrink: 0;
-  flex-shrink: 0;
-  -webkit-flex-basis: 4.25em;
-  flex-basis: 4.25em;
-  width: 4.25em;
-  height: 4.188em;
-  margin-top: 1.625em;
-  margin-left: 6.125em;
+  width: 2.25em;
+  height: 2.188em;
+  margin: 1.25em;
+  flex: 0 0 auto;
+  -webkit-flex: 0 0 auto;
   text-align: center; }
 
 #site-wrapper {
@@ -45,21 +42,20 @@ li {
 section {
   width: 18.125em;
   margin: 0 auto;
-  padding-top: 10.438em; }
+  padding-top: 7em; }
 
 header {
   display: none; }
 
 footer {
-  width: 100%;
   height: 33.438em; }
 
 nav {
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eaeaea), color-stop(0.03, #ffffff));
-  padding-top: 0.313em; }
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eaeaea), color-stop(0.03, #ffffff)); }
 
 div [role="main"] {
-  margin-bottom: 13.188em;
+  margin-top: -5em;
+  margin-bottom: 3em;
   clear: right; }
 
 #episode-count {
@@ -73,18 +69,26 @@ div [role="main"] {
   font-size: 1.375em; }
 
 .show-selector {
-  background-color: #e5e5e5;
-  margin-left: 6.125em; }
+  background-color: #e5e5e5; }
   .show-selector:hover {
     cursor: pointer; }
 
 .menu-container {
-  margin: 0 auto; }
+  margin: 0 auto;
+  width: 70%; }
 
 .active {
   background-color: #000; }
 
-@media screen and (min-width: 61.25em) {
+@media screen and (min-device-width: 768px) {
+  ul:last-child li {
+    margin-top: -1.75em; }
+
+  li {
+    width: 4.25em;
+    height: 4.188em;
+    margin: 2.938em; } }
+@media screen and (min-width: 980px) {
   header {
     width: 80%;
     float: right;
@@ -97,7 +101,12 @@ div [role="main"] {
     max-width: 160em; }
 
   ul {
-    left: 2.5em; }
+    position: relative;
+    top: -1em;
+    left: -5em; }
+
+  .menu-container {
+    height: 9.375em; }
 
   nav {
     padding-top: 0em;

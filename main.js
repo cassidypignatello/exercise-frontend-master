@@ -28,7 +28,7 @@
     if (firstLoad) {
       menuContainer = document.createElement('div');
       menuContainer.classList.add('menu-container');
-      menuContainer.innerHTML = '<ul><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li></li><li></li><li></li><li></li></ul>';
+      menuContainer.innerHTML = '<ul><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li><li class="show-selector"></li></ul><ul><li>1</li><li>2</li><li>3</li><li>4</li></ul>';
       el.appendChild(menuContainer);
     } else {
       menuContainer = menu[menu.length - 1].cloneNode(true);
@@ -97,7 +97,7 @@
     var button = listItems[data.id - 1];
     listItems.forEach(function(item) {
       if (item.innerHTML !== '' || item.classList.contains('active')) {
-        item.innerHTML = '';
+        // item.innerHTML = '';
         item.classList.remove('active');
       }
     });  
