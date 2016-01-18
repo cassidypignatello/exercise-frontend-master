@@ -97,7 +97,7 @@
     var button = listItems[data.id - 1];
     listItems.forEach(function(item) {
       if (item.innerHTML !== '' || item.classList.contains('active')) {
-        // item.innerHTML = '';
+        item.innerHTML = '';
         item.classList.remove('active');
       }
     });  
